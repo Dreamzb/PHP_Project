@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<title>New Chat</title>
+  <style type="text/css">
+    html{font-size:12px;}
+	fieldset{width:300px; margin: 0 auto;}
+	legend{font-weight:bold; font-size:14px;}
+	.label{float:left; width:70px; margin-left:10px;}
+	.left{margin-left:80px;}
+	.input{width:150px;}
+	span{color: #666666;}
+	
+	#messagewindow {
+            height: 500px;
+            border: 1px solid;
+            padding: 5px;
+            overflow: auto;
+        }
+        #wrapper {
+            margin: 35px auto;
+            width: 438px;
+        }
+  </style>
+<script src="jquery-1.7.2.min.js"></script>
+
+
+</head>
+<body>
+//-----------------------------------------------------------------------------
+<div>
+	<fieldset>
+	<legend></legend>
+	<form name="LoginForm" method="post" action="login.php ">
+
+	<p>
+	<label for="user" class="label">Username</label>
+		<input id="user" name="user" type="text" class="input" />
+	<p/>
+	<p>
+	<label for="pd" class="label">Password</label>
+	<input id="pd" name="pd" type="password" class="input" />
+	<p/>
+	<p>
+	<input type="submit" name="submit" value=" Submit " class="left" />
+	</p>
+	</form>
+	</fieldset>
+</div>
+//-----------------------------------------------------------------------------	
+<div id = "regpersom">
+	<fieldset>
+	<legend></legend>
+	<form name="RegForm" method="post" action="reg.php">
+	
+	<p>
+	<label for="user" class="label">Username:</label>
+	<input id="user" name="user" type="text" class="input" />
+	<span></span>
+	<p/>
+	<p>
+	<label for="pd" class="label">Password:</label>
+	<input id="pd" name="pd" type="password" class="input" />
+	<span></span>
+	<p/>
+	<p>
+	<label for="repass" class="label">Re-Password:</label>
+	<input id="repass" name="repass" type="password" class="input" />
+	<p/>
+	<p>
+	<input type="submit" name="submit" value="  Submit  " class="left" />
+	</p>
+	</form>
+	</fieldset>
+</div>
+//-----------------------------------------------------------------------------
+<div  align="center">
+<script type="text/javascript">
+$(document).ready(function(){
+    timestamp = 0;
+    updateMsg();
+    $("form#chatform").submit(function(){
+        $.post("backend.php",{ 
+                    message: $("#msg").val(),
+                    name: $("#author").val(),
+                    action: "postmsg",
+                    time: timestamp
+                }, function(xml) {
+            $("#msg").attr("value","");
+            addMessages(xml);
+        });
+        return false;
+    });
+});
+function addMessages(xml) {
+    if($("status",xml).text() == "2") return;
+    timestamp = $("time",xml).text();
+    $("message",xml).each(function(id) {
+        message = $("message",xml).get(id);
+        $("#messagewindow").prepend("<b>"+$("author",message).text()+
+                                    "</b>: "+$("text",message).text()+
+                                    "<br />");
+    });
+}
+function updateMsg() {
+     //   alert(timestamp);
+    $.post("backend.php",{ time: timestamp }, function(xml) {
+        $("#loading").remove();            
+        addMessages(xml);                  
+    });
+    setTimeout('updateMsg()', 100);      
+}
+</script>		
+    <div id="wrapper" align="left">
+    <p id="messagewindow"><span id="loading">Loading</span></p>
+    <form id="chatform">
+    Name:
+    <input type="text" id="author" size="6" />
+    Input: <input type="text" id="msg" size="30" />
+    <input type="submit" value="Submit" /><br />
+    </form>
+    </div>
+	</div>
+</body>
+</html>

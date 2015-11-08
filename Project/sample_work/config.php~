@@ -1,0 +1,18 @@
+
+<?php
+
+/*
+ * Connecting to mySQL database, print errors if there is any.
+ * 
+ */
+$mysql_hostname = "mysql.cms.waikato.ac.nz";
+$mysql_user = "anaa2";
+$mysql_password = "hason6099";
+$mysql_database = "anaa2";
+$prefix = "";
+$bd = mysql_connect($mysql_hostname, $mysql_user, $mysql_password) or die("Could not connect database");
+mysql_select_db($mysql_database, $bd) or die("Could not select database");
+
+
+
+?>

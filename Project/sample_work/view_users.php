@@ -1,0 +1,64 @@
+
+<html>
+	
+	
+<head>
+<link rel="stylesheet" type="text/css" href="buttons.css">
+<title> Users</title>
+</head>
+<form action="home.php" method="post" >
+  <input id="button"type="submit" value="Home"> 
+</form>
+<body>
+
+<br>
+<br>
+
+<?php
+ 
+ $username = $_GET["username"];
+ 
+ require_once("config.php");
+
+$result = mysql_query("SELECT * FROM users");
+	if (!$result) {
+		echo 'Could not run query: ' . mysql_error();
+		exit;
+	}
+	 
+
+	 echo "<h2 align='left'> User ID:  <b><i>".$username."</i></b></h2>";
+	 echo "<h1>Users Managment</h1>";
+	 echo "<hr>";
+	
+	
+	while ($row = mysql_fetch_array($result))
+		{
+			echo "<div id='formContainer'>";
+				
+					echo "User ID: ". $row["uid"];
+					echo "<br>";
+					echo "Details: ". $row["username"] ."|". $row["fname"]."|". $row["lname"]."|".$row["password"]."|".$row["email"];
+					echo "<br>";
+					echo "<hr>";
+							
+			echo "</div>";
+		}
+
+		echo "<a href='add_user.php?username=".$username."' id='button'>Add new user</a>";
+		echo "<br>";
+			
+?>
+
+<form name="login" action="delete_user.php" method="get" accept-charset="utf-8">  
+ 
+		<label for="pid">User ID</label>   
+       &nbsp; <input type="text" name="user_id" placeholder="Enter user id" required> 
+			  <input type="hidden" name="username" value="<?php echo $_GET["username"]; ?>" />
+
+        <input id="button"type="submit" value="Delete user">  
+
+</form> 
+
+</body>
+</html>

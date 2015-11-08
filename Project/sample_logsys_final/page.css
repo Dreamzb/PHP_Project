@@ -1,0 +1,80 @@
+body{
+	background: white;
+	display: block;
+	margin: 0 auto;
+	width: 1024px;
+}
+
+
+#header{
+	background: #ccc;
+	border:1px solid black;
+}
+
+#online{
+	display: block;
+	float: left;
+	color: green;
+	width: 60px;
+}
+
+#offline{
+	display: block;
+	float: left;
+	color:red;
+	width:750px;
+	
+}
+#register{
+	display: block;
+	float: right;
+        padding-right: 20px;
+}
+
+/*
+  main body
+ 
+ */
+
+#mainpage{
+	background: #ccc;
+	display: block;
+	clear: both;
+	height: 800px;
+	width: 1024px;
+	margin: 0 auto;
+	border:1px solid black;
+}
+#megs{
+	background: #ccc;
+	display: block;
+	clear: both;
+	height: 107px;
+	width: 1022px;
+	margin: 0 auto;
+	border:1px solid black;
+
+}
+
+
+#sidebar{
+	display: block;
+	float:left;
+	width: 270px;
+	height: 690px;
+	border:1px solid black;
+	text-align: center;
+	font-size:18px;
+}
+#messagewindow {
+	height: 620px;
+	width: 700px;
+	font-size:18px;
+	border: 1px solid;
+	padding: 1px;
+	overflow: auto;
+}
+#wrapper {
+	margin: 35px auto;
+	width: 438px;
+}

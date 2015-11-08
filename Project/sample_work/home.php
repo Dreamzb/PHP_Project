@@ -1,0 +1,32 @@
+
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="buttons.css">
+<title>Home</title>
+<form action="index.php" method="post" >
+  <input id="button"type="submit" value="Log out"> 
+</form>
+</head>
+
+<body>
+
+<br>
+<br>
+
+<?php
+ 
+ echo "<h2 align='left'> Your ID: <b><i>".$_GET["username"]."</i></b></h2>";
+ echo "<h1>Home</h1>";
+ echo "<hr>";
+
+ echo "<a href='add_project.php?username=".$_GET["username"]."' id='button'>Add Project</a>";
+ echo "<a href='view_projects.php?username=".$_GET["username"]."' id='button'>View Project</a>";
+ echo "<a href='view_users.php?username=".$_GET["username"]."' id='button'>Add/Delete User</a>";
+?>
+
+
+
+</div>
+
+</body>
+</html>
